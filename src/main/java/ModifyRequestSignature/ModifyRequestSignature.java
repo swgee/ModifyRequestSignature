@@ -261,6 +261,8 @@ public class ModifyRequestSignature implements BurpExtension
         saveSettingsButton.addActionListener(e -> {
             if (headerField.getText().isEmpty() || hashField.getText().isEmpty() || secretField.getText().isEmpty()) {
                 errorLabel.setText("Error: Please fill in header and claim field of hashed body to save.");
+            } else if (!displayedAlgorithm.isEmpty() && displayedAlgorithm.getLast().startsWith("SHA")) {
+                errorLabel.setText("Error: Raw SHA digest must be encoded");
             } else {
                 errorLabel.setText("");
                 try {
